@@ -1402,9 +1402,9 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 
 // EmailJS — reemplazar con tus credenciales de https://www.emailjs.com
 (function() {
-  const PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
-  const SERVICE_ID = 'YOUR_SERVICE_ID';
-  const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+  const PUBLIC_KEY = 'TxsA5mW1DlaG2FU_e';
+  const SERVICE_ID = 'service_i2fjd3m';
+  const TEMPLATE_ID = 'template_j0z9szn';
 
   emailjs.init(PUBLIC_KEY);
 
@@ -1415,11 +1415,14 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     btn.textContent = '⏳ Enviando...';
     btn.disabled = true;
 
+    const now = new Date();
+    const time = now.toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires', dateStyle: 'long', timeStyle: 'short' });
     const data = {
       name: e.target.name.value,
       email: e.target.email.value,
       reason: e.target.reason.value,
       message: e.target.message.value,
+      time,
     };
 
     emailjs.send(SERVICE_ID, TEMPLATE_ID, data)

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width">
   <title>MIA IA — Tu asistente inteligente en WhatsApp</title>
   <meta name="description" content="MIA IA es un asistente de inteligencia artificial que funciona directamente desde WhatsApp. Genera documentos, imágenes, presentaciones, resuelve ejercicios y más.">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style data-framer-font-css="">
     @font-face { font-family: "Switzer"; src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/BLNB4FAQFNK56DWWNF7PMGTCOTZHOEII/ST3WKSSDMBK2MIQQO3MAVYWLF4FTOLFV/6IN5WOLRCYP4G4MOCOHOMXNON6Q7MDAR.woff2"); font-display: swap; font-style: normal; font-weight: 400 }
     @font-face { font-family: "Switzer"; src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/HBNTRIISA5MEXGL5WPYI7CV2HIWTDV3Q/YDPDINVT673XLXNSTMLG4JNCZZMVVNPN/Y7SCNZJOT2MW5ADSGOFLDGH4TNL4JCQY.woff2"); font-display: swap; font-style: normal; font-weight: 700 }
@@ -113,6 +114,15 @@
       .body-main { font-size: 16px; }
       .body-small { font-size: 12px; }
       .text-tiny { font-size: 12px; }
+    }
+    @media (max-width: 480px) {
+      .h1 { font-size: 28px; letter-spacing: -0.02em; }
+      .h2 { font-size: 24px; }
+      .h3 { font-size: 20px; }
+      .h4 { font-size: 18px; }
+      .h5 { font-size: 16px; }
+      .body-main { font-size: 15px; }
+      .container { padding: 0 16px; }
     }
 
     /* ── Buttons ── */
@@ -307,6 +317,11 @@
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
+    @keyframes scrollDot {
+      0% { transform: translateY(-8px); opacity: 0; }
+      50% { transform: translateY(8px); opacity: 1; }
+      100% { transform: translateY(-8px); opacity: 0; }
+    }
 
     @media (max-width: 1199px) {
       .hero { padding: 80px 40px 100px; }
@@ -319,6 +334,16 @@
       .hero p { font-size: 16px; }
       .hero-content { gap: 20px; }
       .hero .container { gap: 80px; }
+      .hero-content-inner { max-width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 130px 16px 40px; }
+      .hero h1 { font-size: 28px; }
+      .hero .container { gap: 60px; }
+      .hero-tag-text { font-size: 10px; }
+      .hero-tag { padding: 6px 12px 6px 6px; }
+      .hero-btns { flex-direction: column; width: 100%; }
+      .hero-btns .btn { width: 100%; justify-content: center; }
     }
 
     /* ── Results / Stats ── */
@@ -374,6 +399,14 @@
       .results-heading { flex-direction: column; }
       .results-heading h2, .results-heading p { max-width: 100%; }
       .benefit-cards { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 480px) {
+      .results { padding: 60px 16px; }
+      .stats-row { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .stat-num { font-size: 28px; }
+      .stat-label { font-size: 14px; }
+      .benefit-card { padding: 12px 0; }
     }
 
     /* ── Services ── */
@@ -418,6 +451,11 @@
       .services { padding: 80px 20px; }
       .services-grid { grid-template-columns: 1fr; }
       .service-card-img { min-height: 200px; }
+    }
+    @media (max-width: 480px) {
+      .services { padding: 60px 16px; }
+      .service-card-text { padding: 16px; }
+      .service-card-text p { font-size: 15px; }
     }
 
     /* ── Plans ── */
@@ -818,8 +856,14 @@
 
     /* ── Responsive Helpers ── */
     @media (max-width: 809px) {
-      .plans-grid { grid-template-columns: 1fr; }
+      .plans-grid { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto; }
       .hero-logos { max-width: 90%; }
+    }
+    @media (max-width: 480px) {
+      .plans { padding: 60px 16px; }
+      .plan-card-body { padding: 24px 16px; }
+      .plan-features { padding: 16px; }
+      .plan-btn-wrap { padding: 0 16px 16px; }
     }
   </style>
 </head>
@@ -860,7 +904,7 @@
         <p>Automatiza tareas, organiza tu flujo de trabajo y mantente enfocado con un SaaS de productividad construido para ayudar a equipos y emprendedores a moverse más rápido.</p>
         <div class="hero-btns">
           <a href="#plans" class="btn">Elegir Plan</a>
-          <a href="#contact" class="btn btn-primary">Comenzar</a>
+          <a href="https://wa.me/5493813352970" target="_blank" rel="noopener" class="btn btn-primary">Comenzar</a>
         </div>
       </div>
       <div class="hero-logos">
@@ -1257,24 +1301,24 @@
       <form id="contactForm">
         <label>
           <div class="form-label">Nombre</div>
-          <input type="text" class="form-input" placeholder="Tu nombre" required>
+          <input type="text" name="name" class="form-input" placeholder="Tu nombre" required>
         </label>
         <label>
           <div class="form-label">Email</div>
-          <input type="email" class="form-input" placeholder="tu@email.com" required>
+          <input type="email" name="email" class="form-input" placeholder="tu@email.com" required>
         </label>
         <label>
           <div class="form-label">Motivo</div>
-          <select class="form-input" style="appearance:auto;">
-            <option>Quiero contratar MIA</option>
-            <option>Soy una institución / empresa</option>
-            <option>Tengo una consulta técnica</option>
-            <option>Otro</option>
+          <select name="reason" class="form-input" style="appearance:auto;">
+            <option value="contratar">Quiero contratar MIA</option>
+            <option value="institucion">Soy una institución / empresa</option>
+            <option value="consulta">Tengo una consulta técnica</option>
+            <option value="otro">Otro</option>
           </select>
         </label>
         <label>
           <div class="form-label">Mensaje</div>
-          <textarea class="form-input form-textarea" placeholder="Tu mensaje" required></textarea>
+          <textarea name="message" class="form-input form-textarea" placeholder="Tu mensaje" required></textarea>
         </label>
         <button type="submit" class="form-btn">Enviar</button>
       </form>
@@ -1356,18 +1400,50 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   });
 });
 
-// Contact form
-document.getElementById('contactForm').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const btn = e.target.querySelector('button');
-    btn.textContent = '✅ ¡Enviado!';
-    btn.style.background = '#2d6a4f';
-    setTimeout(() => {
-      btn.textContent = 'Enviar';
-      btn.style.background = '#111';
-      e.target.reset();
-    }, 3000);
-});
+// EmailJS — reemplazar con tus credenciales de https://www.emailjs.com
+(function() {
+  const PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+  const SERVICE_ID = 'YOUR_SERVICE_ID';
+  const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+
+  emailjs.init(PUBLIC_KEY);
+
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    const origText = btn.textContent;
+    btn.textContent = '⏳ Enviando...';
+    btn.disabled = true;
+
+    const data = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      reason: e.target.reason.value,
+      message: e.target.message.value,
+    };
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, data)
+      .then(() => {
+        btn.textContent = '✅ ¡Enviado!';
+        btn.style.background = '#2d6a4f';
+        e.target.reset();
+        setTimeout(() => {
+          btn.textContent = origText;
+          btn.style.background = '#111';
+          btn.disabled = false;
+        }, 3000);
+      })
+      .catch(() => {
+        btn.textContent = '❌ Error al enviar';
+        btn.style.background = '#a33';
+        setTimeout(() => {
+          btn.textContent = origText;
+          btn.style.background = '#111';
+          btn.disabled = false;
+        }, 3000);
+      });
+  });
+})();
 </script>
 
 </body>

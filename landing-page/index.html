@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>MIA IA — Tu asistente inteligente en WhatsApp</title>
+  <meta name="description" content="MIA IA es un asistente de inteligencia artificial que funciona directamente desde WhatsApp. Genera documentos, imágenes, presentaciones, resuelve ejercicios y más.">
+  <style data-framer-font-css="">
+    @font-face { font-family: "Switzer"; src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/BLNB4FAQFNK56DWWNF7PMGTCOTZHOEII/ST3WKSSDMBK2MIQQO3MAVYWLF4FTOLFV/6IN5WOLRCYP4G4MOCOHOMXNON6Q7MDAR.woff2"); font-display: swap; font-style: normal; font-weight: 400 }
+    @font-face { font-family: "Switzer"; src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/HBNTRIISA5MEXGL5WPYI7CV2HIWTDV3Q/YDPDINVT673XLXNSTMLG4JNCZZMVVNPN/Y7SCNZJOT2MW5ADSGOFLDGH4TNL4JCQY.woff2"); font-display: swap; font-style: normal; font-weight: 700 }
+    @font-face { font-family: "Switzer"; src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/LVPXCMXCWY3V7PSXRMGRQUJDAS2DT47E/BPEVRT2HG7PPVVUS7A67MZQQZW6LR6A5/A7AS3UPAGLC7MDVC67SBNTE5FGF2Z2RG.woff2"); font-display: swap; font-style: italic; font-weight: 700 }
+    @font-face { font-family: "Switzer"; src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/XVUY2PHYBA6KMN4RMEMJPHQSTKCQ267G/UICOQA6KCSHFOSCPYDVVDNNCDKYFXHJB/O34WRFYO7JNWEBBA2LRV2XYRUSYXYDKH.woff2"); font-display: swap; font-style: italic; font-weight: 400 }
+    @font-face { font-family: "Switzer"; src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/5SZVFDB7V52TI6ULVC6J3WQZQCIZVDV5/ODYPSTCUDMKSTYIPTV4CLQ7URIK7XYBJ/YS3VPNVO4B3TOJMEXDGFZQ4TLZGGSRZC.woff2"); font-display: swap; font-style: normal; font-weight: 600 }
+    @font-face { font-family: "Switzer"; src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/OYB4CXKJQXKTNSLJMTDQOIVUL2V5EL7S/WYO2P7DQVV5RNXGMCUO2HL4RJP4VFUAS/6XPIMU23OJVRY676OG5YVJMWEHWICATX.woff2"); font-display: swap; font-style: normal; font-weight: 500 }
+    @font-face { font-family: "Switzer"; src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/QMRBNVYKDJEZ66DA22SPWH5EVVYACHCU/ZHMXHHA546NDNEHJN5RPZX5KISJY5CWF/C6VLICDGQWYKV6YT65TM5G3OVN4AOZBN.woff2"); font-display: swap; font-style: italic; font-weight: 500 }
+    @font-face { font-family: "Inter"; src: url("https://framerusercontent.com/assets/5vvr9Vy74if2I6bQbJvbw7SY1pQ.woff2"); font-display: swap; font-style: normal; font-weight: 400 }
+    @font-face { font-family: "Inter Display"; src: url("https://framerusercontent.com/assets/iwWTDc49ENF2tCHbqlNARXw6Ug.woff2"); font-display: swap; font-style: normal; font-weight: 500 }
+    @font-face { font-family: "DM Sans"; src: url("https://fonts.gstatic.com/s/dmsans/v17/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwAopxhS2f3ZGMZpg.woff2"); font-display: swap; font-style: normal; font-weight: 400 }
+  </style>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      background: #000;
+      color: #c9c9c9;
+      line-height: 1.3;
+      overflow-x: hidden;
+    }
+    ::selection { background: rgba(223,11,0,0.3); color: #fff; }
+
+    :root {
+      --accent: #df0b00;
+      --accent-glass: rgba(223,11,0,0.08);
+      --accent-border: rgba(223,11,0,0.2);
+      --accent-glow: rgba(223,11,0,0.15);
+      --bg-card: #080808;
+      --border: #171717;
+      --border-light: rgba(255,255,255,0.03);
+      --text: #c9c9c9;
+      --text-dim: #a3a3a3;
+      --text-bright: #fff;
+      --radius: 8px;
+      --radius-pill: 50px;
+      --container: 1300px;
+    }
+
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 40px; }
+    @media (max-width: 768px) { .container { padding: 0 20px; } }
+
+    /* ── Typography ── */
+    .h1 {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 500; font-size: 60px; letter-spacing: -0.04em;
+      line-height: 1.2em; color: #fff; text-transform: uppercase;
+    }
+    .h2 {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 500; font-size: 45px; letter-spacing: -0.02em;
+      line-height: 1.2em; color: #fff; text-transform: capitalize;
+    }
+    .h3 {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 30px; letter-spacing: -0.02em;
+      line-height: 1.2em; color: #fff;
+    }
+    .h4 {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 500; font-size: 22px; letter-spacing: 0em;
+      line-height: 1.1em; color: #fff;
+    }
+    .h5 {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 500; font-size: 18px; letter-spacing: -0.02em;
+      line-height: 1.1em; color: #fff;
+    }
+    .body-main {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 18px; letter-spacing: 0px;
+      line-height: 1.3em; color: #c9c9c9;
+    }
+    .body-small {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 14px; letter-spacing: 0em;
+      line-height: 1.2em; color: #c9c9c9;
+    }
+    .text-tiny {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 12px; letter-spacing: 0em;
+      line-height: 1.2em; color: #a3a3a3;
+    }
+    .btn-text {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 16px; letter-spacing: 0em;
+      line-height: 1.1em; color: #fff;
+    }
+
+    @media (max-width: 1199px) {
+      .h1 { font-size: 48px; }
+      .h2 { font-size: 40px; }
+      .h3 { font-size: 25px; }
+      .h4 { font-size: 20px; }
+      .h5 { font-size: calc(1rem * 1.1); }
+      .body-main { font-size: 18px; }
+      .body-small { font-size: 13px; }
+      .text-tiny { font-size: 13px; }
+    }
+    @media (max-width: 679px) {
+      .h1 { font-size: 35px; }
+      .h2 { font-size: 30px; }
+      .h3 { font-size: 22px; }
+      .h4 { font-size: 20px; }
+      .body-main { font-size: 16px; }
+      .body-small { font-size: 12px; }
+      .text-tiny { font-size: 12px; }
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 30px; border-radius: var(--radius-pill);
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 16px; line-height: 1.1em;
+      cursor: pointer; transition: all 0.25s; border: 2px solid var(--border);
+      text-decoration: none;
+      background: transparent;
+      color: #fff;
+    }
+    .btn:hover {
+      background: rgba(255,255,255,0.04);
+    }
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      background: #7a6048;
+      border-color: #7a6048;
+    }
+
+    /* ── Section ── */
+    section { padding: 100px 40px; }
+    @media (max-width: 768px) { section { padding: 80px 20px; } }
+
+    .section-center { text-align: center; }
+    .section-header { margin-bottom: 50px; }
+    .section-header h2 { margin-bottom: 16px; }
+    .section-header p { max-width: 600px; margin: 0 auto; }
+
+    /* ── Navbar ── */
+    nav {
+      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      z-index: 1000;
+      height: 64px;
+      background: #131313;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 32px;
+      backdrop-filter: blur(20px) saturate(1.4);
+      display: flex; align-items: center;
+      padding: 0 16px 0 20px;
+      min-width: 300px;
+      max-width: 600px;
+      width: calc(100% - 80px);
+    }
+    nav .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 8px;
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 700; font-size: 1.2rem;
+      color: #fff; text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 10px; }
+    .nav-links a {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2em;
+      color: #c9c9c9; text-decoration: none;
+      padding: 6px 12px; border-radius: 32px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.06); }
+    .nav-cta {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2em;
+      color: #fff; text-decoration: none;
+      padding: 8px 20px; border-radius: var(--radius-pill);
+      border: 2px solid var(--border);
+      transition: all 0.25s;
+    }
+    .nav-cta:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 24px var(--accent-glow);
+    }
+    .menu-toggle {
+      display: none; background: none; border: none;
+      color: #fff; font-size: 1.5rem; cursor: pointer; padding: 4px;
+    }
+    @media (max-width: 809px) {
+      nav { top: 15px; padding: 0 12px 0 16px; }
+      .nav-links {
+        display: none;
+        position: fixed; top: 80px; left: 20px; right: 20px;
+        flex-direction: column; gap: 4px;
+        background: #131313;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 16px;
+        padding: 16px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 10px 12px; font-size: 14px; }
+      .nav-cta { align-self: flex-start; margin-top: 4px; }
+      .menu-toggle { display: block; }
+    }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 150px 40px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-video-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 50%, #000 100%);
+      z-index: 1;
+    }
+    .hero .container {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 100px;
+      width: 100%;
+    }
+    .hero-content { display: flex; flex-direction: column; align-items: center; gap: 30px; width: 100%; }
+    .hero-content-inner { max-width: 800px; display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px 8px 8px; border-radius: 40px;
+      background: radial-gradient(54.61832% 54.07732% at 38.94711% 79.88955%, #df0b00 0%, rgba(10,9,9,1) 100%);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+    .hero-tag-inner {
+      display: flex; align-items: center; gap: 6px;
+      background: #0a0909; border-radius: 30px;
+      padding: 6px 16px 6px 8px;
+    }
+    .hero-tag-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10.5878px var(--accent);
+    }
+    .hero-tag-text {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 12px; line-height: 1.2em;
+      color: #fff; white-space: nowrap;
+    }
+    .hero h1 {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 500; font-size: 60px; letter-spacing: -0.04em;
+      line-height: 1.2em; color: #fff; text-transform: uppercase;
+      text-align: center;
+      max-width: 1000px;
+    }
+    .hero h1 .highlight { color: var(--accent); }
+    .hero p {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 18px; letter-spacing: 0px;
+      line-height: 1.3em; color: #c9c9c9;
+      text-align: center;
+      max-width: 600px;
+    }
+    .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .hero-logos { width: 100%; max-width: 1000px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+    .hero-logos p {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 12px; line-height: 1.2em;
+      color: #a3a3a3; text-align: center;
+    }
+    .hero-logo-bar {
+      width: 100%; overflow: hidden;
+      mask-image: linear-gradient(to right, transparent 0%, #000 15%, #000 85%, transparent 100%);
+    }
+    .hero-logo-track {
+      display: flex; gap: 35px; width: max-content;
+      animation: logoScroll 20s linear infinite;
+    }
+    .hero-logo-item {
+      flex-shrink: 0; height: 23px;
+      opacity: 0.5;
+      filter: grayscale(1) brightness(1.5);
+    }
+    @keyframes logoScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 1199px) {
+      .hero { padding: 80px 40px 100px; }
+      .hero h1 { font-size: 48px; }
+      .hero p { font-size: 18px; }
+    }
+    @media (max-width: 679px) {
+      .hero { padding: 150px 20px 50px; }
+      .hero h1 { font-size: 35px; }
+      .hero p { font-size: 16px; }
+      .hero-content { gap: 20px; }
+      .hero .container { gap: 80px; }
+    }
+
+    /* ── Results / Stats ── */
+    .results { padding: 100px 40px; }
+    .results-heading { display: flex; gap: 15px; margin-bottom: 50px; align-items: flex-end; }
+    .results-heading h2 { flex: 1; max-width: 600px; }
+    .results-heading p { flex: 1; max-width: 310px; }
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 50px;
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .stat-card { }
+    .stat-num {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 600; font-size: 32px; line-height: 1.1em;
+      color: #fff;
+    }
+    .stat-label {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 16px; line-height: 1.1em;
+      color: #fff;
+      max-width: 200px;
+      margin-top: 8px;
+    }
+    .benefit-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .benefit-card {
+      text-align: center; padding: 16px 0;
+    }
+    .benefit-card .icon { width: 45px; height: 45px; margin: 0 auto 16px; }
+    .benefit-card h4 { margin-bottom: 8px; }
+    .benefit-card p {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2em;
+      color: #c9c9c9;
+    }
+    @media (max-width: 1199px) {
+      .results-grid { gap: 25px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .benefit-cards { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 679px) {
+      .results { padding: 80px 20px; }
+      .results-heading { flex-direction: column; }
+      .results-heading h2, .results-heading p { max-width: 100%; }
+      .benefit-cards { grid-template-columns: 1fr; }
+    }
+
+    /* ── Services ── */
+    .services { padding: 100px 40px; }
+    .services-heading { text-align: center; margin-bottom: 50px; }
+    .services-heading h2 { margin-bottom: 16px; }
+    .services-heading p { max-width: 600px; margin: 0 auto; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .service-card {
+      display: flex; flex-direction: column;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+    .service-card-img {
+      flex: 1; min-height: 250px;
+      background: #0d121a;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      position: absolute; top: 0; left: 0;
+    }
+    .service-card-text { padding: 24px; }
+    .service-card-text h4 { margin-bottom: 4px; }
+    .service-card-text p {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 18px; line-height: 1.3em;
+      color: #c9c9c9;
+    }
+    @media (max-width: 1199px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 679px) {
+      .services { padding: 80px 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card-img { min-height: 200px; }
+    }
+
+    /* ── Plans ── */
+    .plans { padding: 100px 40px; }
+    .plans-heading { text-align: center; margin-bottom: 50px; }
+    .plans-heading h2 { margin-bottom: 16px; }
+    .plans-heading p { max-width: 600px; margin: 0 auto; }
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .plan-card {
+      background: var(--bg-card);
+      border: 1px dashed #2e2e2e;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .plan-card-body {
+      padding: 32px 24px;
+    }
+    .plan-card-header { border-bottom: 2px solid #fff; padding-bottom: 20px; }
+    .plan-card-name {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .plan-card-name .icon { width: 36px; height: 36px; }
+    .plan-card-name h4 { color: #fff; }
+    .plan-badge {
+      padding: 2px 10px; border: 1px solid #fff;
+      border-radius: 4px; font-size: 12px; line-height: 18px;
+      color: #fff; background: #171717;
+    }
+    .plan-desc {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2em;
+      color: #c9c9c9; margin-top: 8px;
+    }
+    .plan-price-row { display: flex; align-items: baseline; gap: 4px; margin-top: 20px; }
+    .plan-price {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 30px; letter-spacing: -0.02em;
+      line-height: 1.2em; color: #fff;
+    }
+    .plan-period {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 500; font-size: 22px; letter-spacing: 0em;
+      line-height: 1.1em; color: #c9c9c9;
+    }
+    .plan-features { padding: 24px; }
+    .plan-feat {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 0;
+    }
+    .plan-feat .check { width: 24px; height: 24px; flex-shrink: 0; }
+    .plan-feat span {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2em;
+      color: #fff;
+    }
+    .plan-btn-wrap { padding: 0 24px 24px; }
+
+    /* ── Comparison Table ── */
+    .comparison-table {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 50px;
+      background: #000;
+    }
+    .comp-header {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .comp-header-cell {
+      padding: 24px 32px;
+      display: flex; align-items: center; gap: 8px;
+      background: #0f0f0f;
+      border-right: 1px solid var(--border);
+    }
+    .comp-header-cell:last-child { border-right: none; }
+    .comp-header-cell.active { background: #2e2e2e; border-radius: 32px; padding: 6px 12px; margin: 24px 32px; }
+    .comp-header-cell .icon { width: 35px; height: 35px; }
+    .comp-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .comp-row:last-child { border-bottom: none; }
+    .comp-row:nth-child(even) { background: var(--bg-card); }
+    .comp-cell {
+      padding: 24px 32px;
+      font-family: "Swizer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 16px; line-height: 1.1em;
+      color: #c9c9c9;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .comp-cell .check-icon { width: 24px; height: 24px; }
+
+    /* ── Why Us ── */
+    .whyus { padding: 100px 40px; }
+    .whyus h2 { text-align: center; margin-bottom: 16px; }
+    .whyus > p { text-align: center; max-width: 600px; margin: 0 auto 50px; }
+    .whyus-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: var(--container);
+      margin: 0 auto;
+    }
+    .whyus-col h4 {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 500; font-size: 22px; line-height: 1.1em;
+      color: #fff; margin-bottom: 20px;
+    }
+    .whyus-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2px;
+    }
+    .whyus-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .whyus-item:last-child { border-bottom: none; }
+    .whyus-item .check-circle { width: 19px; height: 19px; flex-shrink: 0; }
+    .whyus-item span {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2em;
+      color: #c9c9c9;
+    }
+    .whyus-highlight {
+      background: var(--accent);
+      border-radius: var(--radius);
+      padding: 20px 30px;
+      margin-top: 20px;
+    }
+    .whyus-highlight span {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2em;
+      color: #fff;
+    }
+    @media (max-width: 809px) {
+      .whyus-grid { grid-template-columns: 1fr; gap: 30px; }
+    }
+
+    /* ── Reviews ── */
+    .reviews { padding: 100px 40px; }
+    .reviews-heading { display: flex; gap: 15px; margin-bottom: 50px; align-items: flex-end; }
+    .reviews-heading h2 { flex: 1; max-width: 1120px; }
+    .reviews-heading p { flex: 1; max-width: 310px; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      grid-auto-rows: 250px;
+    }
+    .rev-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .rev-card-metric h3 { margin-bottom: 14px; }
+    .rev-card-metric .logo { height: 24px; opacity: 0.7; }
+    .rev-card-text {
+      display: flex; flex-direction: column; justify-content: space-between;
+      height: 100%;
+    }
+    .rev-card-text p {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 16px; line-height: 1.3em;
+      color: #c9c9c9;
+    }
+    .rev-author {
+      display: flex; align-items: center; gap: 12px; margin-top: 12px;
+    }
+    .rev-avatar {
+      width: 46px; height: 46px; border-radius: 30px;
+      overflow: hidden; flex-shrink: 0;
+      background: #333;
+    }
+    .rev-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .rev-author-info { }
+    .rev-author-name {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 18px; line-height: 1.3em;
+      color: #fff;
+    }
+    .rev-author-role {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2em;
+      color: #c9c9c9;
+    }
+    .rev-twitter {
+      width: 24px; height: 24px; flex-shrink: 0;
+      background: #3d3d3d; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-left: auto;
+    }
+    .rev-card.wide { grid-column: span 2; }
+    .rev-card.tall { grid-row: span 2; }
+    @media (max-width: 1199px) {
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 280px; }
+      .rev-card.wide { grid-column: span 2; }
+    }
+    @media (max-width: 679px) {
+      .reviews { padding: 80px 20px; }
+      .reviews-heading { flex-direction: column; }
+      .reviews-heading p { max-width: 100%; }
+      .reviews-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+      .rev-card.wide { grid-column: 1; }
+    }
+
+    /* ── FAQ ── */
+    .faq { padding: 100px 40px; }
+    .faq-center { text-align: center; max-width: 800px; margin: 0 auto; }
+    .faq-center h2 { margin-bottom: 16px; }
+    .faq-center > p { margin-bottom: 50px; }
+    .faq-list { width: 100%; }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+    .faq-q {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px;
+      padding: 15px 24px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+    .faq-q:hover { background: rgba(255,255,255,0.02); }
+    .faq-q h5 { flex: 1; }
+    .faq-icon { width: 40px; height: 40px; flex-shrink: 0; position: relative; }
+    .faq-icon-bar {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 20px; height: 2px; background: #fff; border-radius: 2px;
+      transition: transform 0.3s;
+    }
+    .faq-icon-bar:last-child { transform: translate(-50%, -50%) rotate(90deg); }
+    .faq-item.open .faq-icon-bar:last-child { transform: translate(-50%, -50%) rotate(0deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0 24px;
+    }
+    .faq-item.open .faq-a {
+      max-height: 400px;
+      padding: 0 24px 24px;
+      border-top: 1px solid var(--border);
+    }
+    .faq-a p {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 18px; line-height: 1.3em;
+      color: #c9c9c9;
+    }
+
+    /* ── Contact ── */
+    .contact { padding: 100px 40px; }
+    .contact-center { text-align: center; max-width: 600px; margin: 0 auto 50px; }
+    .contact-center h2 { margin-bottom: 16px; }
+    .contact-form-wrap { max-width: 600px; margin: 0 auto; }
+    .contact-form-wrap form { display: flex; flex-direction: column; gap: 10px; }
+    .form-label {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 12px; line-height: 1.2em;
+      color: #cfcfcf; margin-bottom: 4px;
+    }
+    .form-input {
+      width: 100%; padding: 12px 16px;
+      background: #cfcfcf;
+      border: 1px solid #fff;
+      border-radius: 10px;
+      font-family: "Inter Display", sans-serif;
+      font-weight: 500; font-size: 14px; letter-spacing: 0em; line-height: 1.2em;
+      color: #3d3d3d;
+      transition: border-color 0.2s;
+    }
+    .form-input::placeholder { color: #000; }
+    .form-input:focus { outline: none; border-color: #09f; }
+    .form-textarea {
+      min-height: 220px; resize: vertical;
+    }
+    .form-btn {
+      width: 100%;
+      padding: 15px 0;
+      background: #111;
+      border: none; border-radius: 10px;
+      cursor: pointer;
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 16px; line-height: 1.1em;
+      color: #fff;
+      transition: background 0.2s;
+    }
+    .form-btn:hover { background: #222; }
+
+    /* ── Footer ── */
+    footer {
+      background: #080808;
+      padding: 80px 40px 25px;
+    }
+    footer .footer-inner { max-width: var(--container); margin: 0 auto; }
+    .footer-content {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 40px;
+      padding-bottom: 40px;
+    }
+    .footer-about { max-width: 380px; }
+    .footer-about .logo { margin-bottom: 20px; }
+    .footer-about p {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 16px; line-height: 1.1em;
+      color: #fff;
+    }
+    .footer-links {
+      display: flex; gap: 80px; justify-content: flex-end;
+    }
+    .footer-col h4 {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 500; font-size: 22px; line-height: 1.1em;
+      color: #fff; margin-bottom: 24px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .footer-col ul li {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2em;
+      color: #c9c9c9; cursor: pointer;
+      transition: color 0.2s;
+    }
+    .footer-col ul li:hover { color: #fff; }
+    .footer-newsletter { margin-top: 30px; }
+    .footer-newsletter h5 {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 500; font-size: 18px; letter-spacing: -0.02em;
+      line-height: 1.1em; color: #fff; margin-bottom: 16px;
+    }
+    .newsletter-form {
+      display: flex; gap: 0; max-width: 400px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: rgba(255,255,255,0.01);
+      backdrop-filter: blur(5px);
+      overflow: hidden;
+    }
+    .newsletter-form input {
+      flex: 1; padding: 14px 20px;
+      background: transparent; border: none;
+      font-family: "Inter", sans-serif;
+      font-weight: 500; font-size: 16px; line-height: 1.2em;
+      color: #fff;
+    }
+    .newsletter-form input::placeholder { color: #a3a3a3; }
+    .newsletter-form input:focus { outline: none; }
+    .newsletter-form button {
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.01);
+      border: 1px solid #fff;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2em;
+      color: #fff;
+      margin: 4px;
+      transition: background 0.2s;
+    }
+    .newsletter-form button:hover {
+      background: rgba(223,11,0,0.3);
+    }
+    .footer-bottom {
+      border-top: 1px solid #171719;
+      padding-top: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .footer-bottom p {
+      font-family: "Switzer", "Switzer Placeholder", sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2em;
+      color: #cfcfcf;
+    }
+    @media (max-width: 1199px) {
+      .footer-content { grid-template-columns: 1fr; }
+      .footer-links { justify-content: flex-start; }
+    }
+    @media (max-width: 679px) {
+      footer { padding: 60px 20px 20px; }
+      .footer-links { flex-direction: column; gap: 40px; }
+    }
+
+    /* ── Divider ── */
+    .divider { height: 1px; background: var(--border); margin: 0; }
+
+    /* ── Responsive Helpers ── */
+    @media (max-width: 809px) {
+      .plans-grid { grid-template-columns: 1fr; }
+      .hero-logos { max-width: 90%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo"><span>MIA</span> IA</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#results">Resultados</a>
+      <a href="#services">Servicios</a>
+      <a href="#plans">Planes</a>
+      <a href="#why-us">Por Qué Nosotros</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="nav-cta">Contacto</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="hero">
+  <video class="hero-video-bg" autoplay muted loop playsinline poster="">
+    <source src="InShot_20260711_190704337.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-content-inner">
+        <div class="hero-tag">
+          <div class="hero-tag-inner">
+            <div class="hero-tag-dot"></div>
+            <span class="hero-tag-text">Ayudamos a más de 150+ negocios</span>
+          </div>
+        </div>
+        <h1>Automatiza tu trabajo con <span class="highlight">IA inteligente</span></h1>
+        <p>Automatiza tareas, organiza tu flujo de trabajo y mantente enfocado con un SaaS de productividad construido para ayudar a equipos y emprendedores a moverse más rápido.</p>
+        <div class="hero-btns">
+          <a href="#plans" class="btn">Elegir Plan</a>
+          <a href="#contact" class="btn btn-primary">Comenzar</a>
+        </div>
+      </div>
+      <div class="hero-logos">
+        <p class="text-tiny">Confían en nosotros más de 100 equipos</p>
+        <div class="hero-logo-bar">
+          <div class="hero-logo-track" id="logoTrack">
+            <!-- Logos will be replicated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;justify-content:center;">
+      <div style="width:20px;height:30px;border:2px solid rgba(255,255,255,0.5);border-radius:20px;position:relative;display:flex;align-items:center;justify-content:center;">
+        <div style="width:6px;height:6px;border-radius:50%;background:#fff;position:absolute;animation:scrollDot 2s ease infinite;"></div>
+      </div>
+      <p style="font-family:'DM Sans','DM Sans Placeholder',sans-serif;font-size:14px;line-height:1.3;color:gray;text-align:center;">Desplázate para descubrir</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== RESULTS ========== -->
+<section class="results" id="results">
+  <div class="container">
+    <div class="results-heading">
+      <h2 class="h2">Resultados reales, flujos más rápidos.</h2>
+      <p class="body-main">Descubre cómo la IA ayuda a los equipos a ahorrar tiempo, mejorar el enfoque y avanzar con menos esfuerzo.</p>
+    </div>
+    <div class="results-grid">
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num">78%</div><div class="stat-label">Menos tiempo en tareas</div></div>
+        <div class="stat-card"><div class="stat-num">65%</div><div class="stat-label">Flujos gestionados por IA</div></div>
+        <div class="stat-card"><div class="stat-num">42%</div><div class="stat-label">Aumento en productividad</div></div>
+        <div class="stat-card"><div class="stat-num">58%</div><div class="stat-label">Menos acciones manuales</div></div>
+      </div>
+      <div class="benefit-cards">
+        <div class="benefit-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" width="45" height="45" fill="none" stroke="#fff" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <h4 class="h4">Planificar</h4>
+          <p>Define el flujo de trabajo ideal identificando dónde se pierde tiempo.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" width="45" height="45" fill="none" stroke="#fff" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/><path d="m16 12-3 3-3-3"/></svg>
+          </div>
+          <h4 class="h4">Automatizar</h4>
+          <p>Convierte tareas repetitivas en acciones impulsadas por IA.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" width="45" height="45" fill="none" stroke="#fff" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/><path d="m8 15 3-3 3 3"/></svg>
+          </div>
+          <h4 class="h4">Optimizar</h4>
+          <p>Mejora las operaciones diarias refinando procesos.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" width="45" height="45" fill="none" stroke="#fff" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 12 8 8"/><path d="M16 6h4v4"/></svg>
+          </div>
+          <h4 class="h4">Escalar</h4>
+          <p>Haz crecer tu sistema de productividad a medida que tu equipo se expande.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== SERVICES ========== -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-heading">
+      <h2 class="h2">Lo Que Ofrecemos</h2>
+      <p class="body-main">Potentes funciones de IA diseñadas para simplificar flujos de trabajo, ahorrar tiempo y ayudar a los equipos a moverse más rápido con menos esfuerzo.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-card-img">
+          <div style="position:absolute;inset:0;background:#0d121a;display:flex;align-items:center;justify-content:center;color:#444;font-size:14px;">📊 Dashboard</div>
+        </div>
+        <div class="service-card-text">
+          <h4 class="h4">Trabaja Más Rápido</h4>
+          <p>Automatiza tareas repetitivas y genera resultados en segundos.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-card-img">
+          <div style="position:absolute;inset:0;background:#0d121a;display:flex;align-items:center;justify-content:center;color:#444;font-size:14px;">📱 Multiplataforma</div>
+        </div>
+        <div class="service-card-text">
+          <h4 class="h4">Estructura que se Adapta</h4>
+          <p>Secciones flexibles diseñadas para reordenarse sin esfuerzo.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-card-img">
+          <div style="position:absolute;inset:0;background:#0d121a;display:flex;align-items:center;justify-content:center;color:#444;font-size:14px;">🎨 Generador IA</div>
+        </div>
+        <div class="service-card-text">
+          <h4 class="h4">Experiencia Fluida</h4>
+          <p>Un diseño que se adapta perfectamente a cada pantalla, de escritorio a móvil.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== PLANS ========== -->
+<section class="plans" id="plans">
+  <div class="container">
+    <div class="plans-heading">
+      <h2 class="h2">Elige Tu Plan</h2>
+      <p class="body-main">Elige la opción que mejor se adapte a las necesidades de tu equipo, ya sea que estés comenzando o escalando rápido.</p>
+    </div>
+    <div class="plans-grid">
+      <!-- Free -->
+      <div class="plan-card">
+        <div class="plan-card-body">
+          <div class="plan-card-header">
+            <div class="plan-card-name">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+              <h4 class="h4">Gratis</h4>
+            </div>
+            <p class="plan-desc">Perfecto para quienes recién comienzan</p>
+          </div>
+          <div class="plan-price-row">
+            <span class="plan-price">$0</span>
+            <span class="plan-period">/mes</span>
+          </div>
+        </div>
+        <div class="plan-features">
+          <div class="plan-feat"><svg class="check" viewBox="0 0 24 24" fill="#fff"><path d="M20 6 9 17l-5-5"/></svg><span>30 mensajes / día</span></div>
+          <div class="plan-feat"><svg class="check" viewBox="0 0 24 24" fill="#fff"><path d="M20 6 9 17l-5-5"/></svg><span>5 imágenes / día</span></div>
+          <div class="plan-feat"><svg class="check" viewBox="0 0 24 24" fill="#fff"><path d="M20 6 9 17l-5-5"/></svg><span>3 documentos / día</span></div>
+          <div class="plan-feat"><svg class="check" viewBox="0 0 24 24" fill="#fff"><path d="M20 6 9 17l-5-5"/></svg><span>5 búsquedas web / día</span></div>
+        </div>
+        <div class="plan-btn-wrap"><a href="#contact" class="btn" style="width:100%;justify-content:center;">Ver precios</a></div>
+      </div>
+
+      <!-- Estudiante (Pro) -->
+      <div class="plan-card" style="border-color:var(--accent);border-style:solid;">
+        <div class="plan-card-body">
+          <div class="plan-card-header">
+            <div class="plan-card-name">
+              <span class="plan-badge">Más popular</span>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/><path d="m16 12-3 3-3-3"/></svg>
+              <h4 class="h4">Estudiante</h4>
+            </div>
+            <p class="plan-desc">Para equipos que quieren automatización completa</p>
+          </div>
+          <div class="plan-price-row">
+            <span class="plan-price">$6.000</span>
+            <span class="plan-period">/mes</span>
+          </div>
+        </div>
+        <div class="plan-features">
+          <div class="plan-feat"><svg class="check" viewBox="0 0 24 24" fill="#fff"><path d="M20 6 9 17l-5-5"/></svg><span>200 mensajes / día</span></div>
+          <div class="plan-feat"><svg class="check" viewBox="0 0 24 24" fill="#fff"><path d="M20 6 9 17l-5-5"/></svg><span>30 imágenes / día</span></div>
+          <div class="plan-feat"><svg class="check" viewBox="0 0 24 24" fill="#fff"><path d="M20 6 9 17l-5-5"/></svg><span>20 documentos / día</span></div>
+          <div class="plan-feat"><svg class="check" viewBox="0 0 24 24" fill="#fff"><path d="M20 6 9 17l-5-5"/></svg><span>Presentaciones ilimitadas</span></div>
+          <div class="plan-feat"><svg class="check" viewBox="0 0 24 24" fill="#fff"><path d="M20 6 9 17l-5-5"/></svg><span>20 audios / mes</span></div>
+        </div>
+        <div class="plan-btn-wrap"><a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;">Ver precios</a></div>
+      </div>
+
+      <!-- Docente (Enterprise) -->
+      <div class="plan-card">
+        <div class="plan-card-body">
+          <div class="plan-card-header">
+            <div class="plan-card-name">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 12 8 8"/><path d="M16 6h4v4"/></svg>
+              <h4 class="h4">Docente</h4>
+            </div>
+            <p class="plan-desc">Para equipos en crecimiento que necesitan control</p>
+          </div>
+          <div class="plan-price-row">
+            <span class="plan-price">$12.000</span>
+            <span class="plan-period">/mes</span>
+          </div>
+        </div>
+        <div class="plan-features">
+          <div class="plan-feat"><svg class="check" viewBox="0 0 24 24" fill="#fff"><path d="M20 6 9 17l-5-5"/></svg><span>500 mensajes / día</span></div>
+          <div class="plan-feat"><svg class="check" viewBox="0 0 24 24" fill="#fff"><path d="M20 6 9 17l-5-5"/></svg><span>80 imágenes / día</span></div>
+          <div class="plan-feat"><svg class="check" viewBox="0 0 24 24" fill="#fff"><path d="M20 6 9 17l-5-5"/></svg><span>50 documentos / día</span></div>
+          <div class="plan-feat"><svg class="check" viewBox="0 0 24 24" fill="#fff"><path d="M20 6 9 17l-5-5"/></svg><span>Soporte prioritario</span></div>
+          <div class="plan-feat"><svg class="check" viewBox="0 0 24 24" fill="#fff"><path d="M20 6 9 17l-5-5"/></svg><span>Panel admin</span></div>
+        </div>
+        <div class="plan-btn-wrap"><a href="#contact" class="btn" style="width:100%;justify-content:center;">Ver precios</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== WHY US ========== -->
+<section class="whyus" id="why-us">
+  <div class="container">
+    <h2 class="h2 section-center">Precios flexibles</h2>
+    <p class="body-main">Dos modelos de contratación para automatización escalable y sistemas de IA personalizados.</p>
+    <div class="whyus-grid">
+      <div class="whyus-col">
+        <h4 class="h4" style="display:flex;align-items:center;gap:8px;"><span style="color:#888;">✗</span> Otras Plataformas</h4>
+        <div class="whyus-card">
+          <div class="whyus-item"><svg class="check-circle" viewBox="0 0 24 24" fill="#888"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Genéricas y dispersas</span></div>
+          <div class="whyus-item"><svg class="check-circle" viewBox="0 0 24 24" fill="#888"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Difíciles de navegar</span></div>
+          <div class="whyus-item"><svg class="check-circle" viewBox="0 0 24 24" fill="#888"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Generalmente manuales</span></div>
+          <div class="whyus-item"><svg class="check-circle" viewBox="0 0 24 24" fill="#888"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Baja organización</span></div>
+          <div class="whyus-item"><svg class="check-circle" viewBox="0 0 24 24" fill="#888"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Limitadas o ausentes</span></div>
+          <div class="whyus-item"><svg class="check-circle" viewBox="0 0 24 24" fill="#888"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Básicas para individuos</span></div>
+          <div class="whyus-item"><svg class="check-circle" viewBox="0 0 24 24" fill="#888"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Inconsistentes</span></div>
+        </div>
+      </div>
+      <div class="whyus-col">
+        <h4 class="h4" style="display:flex;align-items:center;gap:8px;"><span style="color:var(--accent);">✓</span> MIA IA</h4>
+        <div class="whyus-card" style="border-color:var(--accent);border-style:solid;">
+          <div style="background:var(--accent);border-radius:8px 8px 0 0;padding:20px 30px;"><h4 class="h4" style="color:#fff;">AVALANCHE</h4></div>
+          <div style="background:var(--bg-card);border-radius:0 0 8px 8px;padding:24px;">
+            <div class="whyus-item"><svg class="check-circle" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Clara y estructurada</span></div>
+            <div class="whyus-item"><svg class="check-circle" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Rápida y contextual</span></div>
+            <div class="whyus-item"><svg class="check-circle" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Detección automática</span></div>
+            <div class="whyus-item"><svg class="check-circle" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Inteligente y enfocada</span></div>
+            <div class="whyus-item"><svg class="check-circle" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Construida para productividad en equipo</span></div>
+            <div class="whyus-item"><svg class="check-circle" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Limpia y confiable</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== REVIEWS ========== -->
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="reviews-heading">
+      <h2 class="h2">Equipos Modernos Confían en Nosotros</h2>
+      <p class="body-main">Únete a empresas en crecimiento que confían en la IA para simplificar flujos de trabajo y ahorrar tiempo.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="rev-card">
+        <div class="rev-card-metric">
+          <h3 class="h3">10X</h3>
+          <h4 class="h4">Velocidad al organizar</h4>
+        </div>
+        <div class="logo" style="height:24px;background:#333;border-radius:4px;width:106px;"></div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-metric">
+          <h3 class="h3">2X</h3>
+          <h4 class="h4">Aumento de Eficiencia</h4>
+        </div>
+        <div class="logo" style="height:24px;background:#333;border-radius:4px;width:80px;"></div>
+      </div>
+      <div class="rev-card wide">
+        <div style="display:flex;flex-direction:column;justify-content:space-between;height:100%;">
+          <p class="body-main">"Ahorramos muchísimo tiempo cada semana. Convierte reuniones largas en notas útiles y fáciles de revisar y compartir."</p>
+          <div class="rev-author">
+            <div class="rev-avatar"><div style="width:100%;height:100%;background:#444;display:flex;align-items:center;justify-content:center;color:#888;">👤</div></div>
+            <div class="rev-author-info">
+              <div class="rev-author-name">Juan Martínez</div>
+              <div class="rev-author-role">Gerente de Proyectos</div>
+            </div>
+            <div class="rev-twitter" style="margin-left:auto;">𝕏</div>
+          </div>
+        </div>
+      </div>
+      <div class="rev-card wide">
+        <div style="display:flex;flex-direction:column;justify-content:space-between;height:100%;">
+          <p class="body-main">"Esta IA cambió completamente cómo nuestro equipo maneja las reuniones. Los resúmenes son claros, las acciones están organizadas."</p>
+          <div class="rev-author">
+            <div class="rev-avatar"><div style="width:100%;height:100%;background:#444;display:flex;align-items:center;justify-content:center;color:#888;">👤</div></div>
+            <div class="rev-author-info">
+              <div class="rev-author-name">Carlos Johnson</div>
+              <div class="rev-author-role">Líder de Operaciones</div>
+            </div>
+            <div class="rev-twitter" style="margin-left:auto;">𝕏</div>
+          </div>
+        </div>
+      </div>
+      <div class="rev-card wide">
+        <div style="display:flex;flex-direction:column;justify-content:space-between;height:100%;">
+          <p class="body-main">"La búsqueda es rápida, el diseño es limpio. Se adapta perfectamente a nuestro proceso diario."</p>
+          <div class="rev-author">
+            <div class="rev-avatar"><div style="width:100%;height:100%;background:#444;display:flex;align-items:center;justify-content:center;color:#888;">👤</div></div>
+            <div class="rev-author-info">
+              <div class="rev-author-name">Elena García</div>
+              <div class="rev-author-role">Líder de Equipo</div>
+            </div>
+            <div class="rev-twitter" style="margin-left:auto;">𝕏</div>
+          </div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-metric">
+          <h3 class="h3">5X</h3>
+          <h4 class="h4">Crecimiento del Equipo</h4>
+        </div>
+        <div class="logo" style="height:24px;background:#333;border-radius:4px;width:90px;"></div>
+      </div>
+      <div class="rev-card wide">
+        <div style="display:flex;flex-direction:column;justify-content:space-between;height:100%;">
+          <p class="body-main">"Me encanta cómo resalta los puntos clave y las acciones automáticamente."</p>
+          <div class="rev-author">
+            <div class="rev-avatar"><div style="width:100%;height:100%;background:#444;display:flex;align-items:center;justify-content:center;color:#888;">👤</div></div>
+            <div class="rev-author-info">
+              <div class="rev-author-name">Olivia Torres</div>
+              <div class="rev-author-role">Directora de Operaciones</div>
+            </div>
+            <div class="rev-twitter" style="margin-left:auto;">𝕏</div>
+          </div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-metric">
+          <h3 class="h3">3X</h3>
+          <h4 class="h4">Aumento de Productividad</h4>
+        </div>
+        <div class="logo" style="height:24px;background:#333;border-radius:4px;width:70px;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== FAQ ========== -->
+<section class="faq" id="faq">
+  <div class="faq-center">
+    <h2 class="h2">Preguntas Frecuentes</h2>
+    <p class="body-main">Encuentra respuestas rápidas sobre cómo funciona la IA, qué puede hacer y cómo se adapta a tu flujo de trabajo.</p>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h5 class="h5">1. ¿Cómo funciona la IA?</h5>
+          <div class="faq-icon"><div class="faq-icon-bar"></div><div class="faq-icon-bar"></div></div>
+        </div>
+        <div class="faq-a"><p>Analiza tus solicitudes y el contexto del flujo de trabajo para generar resúmenes, detectar acciones y organizar información automáticamente usando múltiples modelos de IA (Groq, Gemini, Claude, DeepSeek).</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h5 class="h5">2. ¿Puedo usarlo con mi equipo?</h5>
+          <div class="faq-icon"><div class="faq-icon-bar"></div><div class="faq-icon-bar"></div></div>
+        </div>
+        <div class="faq-a"><p>Sí. Nuestros planes Estudiante, Docente e Institucional soportan espacios de trabajo en equipo, carpetas compartidas y funciones colaborativas. El plan Institucional incluye controles de administrador.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h5 class="h5">3. ¿Es fácil de configurar?</h5>
+          <div class="faq-icon"><div class="faq-icon-bar"></div><div class="faq-icon-bar"></div></div>
+        </div>
+        <div class="faq-a"><p>Totalmente. Solo guarda el contacto de WhatsApp y empieza a chatear. Sin apps que instalar, sin configuración compleja. Todo funciona de inmediato.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h5 class="h5">4. ¿Soporta búsqueda en conversaciones?</h5>
+          <div class="faq-icon"><div class="faq-icon-bar"></div><div class="faq-icon-bar"></div></div>
+        </div>
+        <div class="faq-a"><p>Sí. MIA puede buscar en el historial de tus conversaciones y recuperar información relevante, facilitando encontrar documentos, resúmenes y decisiones anteriores.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h5 class="h5">5. ¿Puedo personalizar el flujo de trabajo?</h5>
+          <div class="faq-icon"><div class="faq-icon-bar"></div><div class="faq-icon-bar"></div></div>
+        </div>
+        <div class="faq-a"><p>Sí. Puedes personalizar cómo responde MIA, elegir modelos de IA preferidos, configurar formatos de documentos y adaptar el sistema a tus necesidades específicas.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h5 class="h5">6. ¿Hay una prueba gratuita?</h5>
+          <div class="faq-icon"><div class="faq-icon-bar"></div><div class="faq-icon-bar"></div></div>
+        </div>
+        <div class="faq-a"><p>¡Sí! El plan Gratis te da 30 mensajes por día — suficiente para probar todas las funciones. Sin tarjeta de crédito. Cuando estés listo, actualiza para desbloquear más.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== CONTACT ========== -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-center">
+      <h2 class="h2">Iniciemos una Conversación</h2>
+      <p class="body-main">¿Tienes una pregunta, necesitas una solución personalizada o quieres explorar cómo MIA se adapta a tu flujo de trabajo?</p>
+    </div>
+    <div class="contact-form-wrap">
+      <form id="contactForm">
+        <label>
+          <div class="form-label">Nombre</div>
+          <input type="text" class="form-input" placeholder="Tu nombre" required>
+        </label>
+        <label>
+          <div class="form-label">Email</div>
+          <input type="email" class="form-input" placeholder="tu@email.com" required>
+        </label>
+        <label>
+          <div class="form-label">Motivo</div>
+          <select class="form-input" style="appearance:auto;">
+            <option>Quiero contratar MIA</option>
+            <option>Soy una institución / empresa</option>
+            <option>Tengo una consulta técnica</option>
+            <option>Otro</option>
+          </select>
+        </label>
+        <label>
+          <div class="form-label">Mensaje</div>
+          <textarea class="form-input form-textarea" placeholder="Tu mensaje" required></textarea>
+        </label>
+        <button type="submit" class="form-btn">Enviar</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-content">
+      <div class="footer-about">
+        <a href="#" class="nav-logo" style="font-size:1.1rem;"><span>MIA</span> IA</a>
+        <p>MIA construye IA que trabaja silenciosamente en segundo plano, para que puedas avanzar sin esfuerzo.</p>
+        <div class="footer-newsletter">
+          <h5 class="h5">Recibe el newsletter</h5>
+          <div class="newsletter-form">
+            <input type="email" placeholder="Tu Email">
+            <button type="submit">Suscribirse</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4 class="h4">Enlaces Rápidos</h4>
+          <ul>
+            <li><a href="#results" style="color:inherit;text-decoration:none;">Resultados</a></li>
+            <li><a href="#services" style="color:inherit;text-decoration:none;">Servicios</a></li>
+            <li><a href="#plans" style="color:inherit;text-decoration:none;">Planes</a></li>
+            <li><a href="#why-us" style="color:inherit;text-decoration:none;">Por Qué Nosotros</a></li>
+            <li><a href="#faq" style="color:inherit;text-decoration:none;">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="h4">Páginas</h4>
+          <ul>
+            <li>Inicio</li>
+            <li>Política de Privacidad</li>
+            <li>Términos de Servicio</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="h4">Social</h4>
+          <ul>
+            <li>Instagram</li>
+            <li>Facebook</li>
+            <li>LinkedIn</li>
+            <li>Twitter (X)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© MIA IA Todos los derechos reservados 2026</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// FAQ toggle
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// Mobile menu
+document.getElementById('menuToggle').addEventListener('click', () => {
+  const links = document.getElementById('navLinks');
+  const btn = document.getElementById('menuToggle');
+  links.classList.toggle('open');
+  btn.textContent = links.classList.contains('open') ? '✕' : '☰';
+});
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('menuToggle').textContent = '☰';
+  });
+});
+
+// Contact form
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+    btn.textContent = '✅ ¡Enviado!';
+    btn.style.background = '#2d6a4f';
+    setTimeout(() => {
+      btn.textContent = 'Enviar';
+      btn.style.background = '#111';
+      e.target.reset();
+    }, 3000);
+});
+</script>
+
+</body>
+</html>
